@@ -4,6 +4,9 @@ import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
+import jaLocale from "@fullcalendar/core/locales/ja";
+import { DateSelectArg } from "@fullcalendar/core/index.js";
+
 
 
 interface Event {
@@ -14,9 +17,29 @@ interface Event {
 }
 
 
+
+
 export default function Calendar() {
-    const handleDateClick = (arg) => {
+    const handleDateClick = (arg: { dateStr: any }) => {
         alert(arg.dateStr)
+    }
+    const handleDateSelect= (args: DateSelectArg) => {
+        const title = prompt('予定のタイトルを入力してください')
+        const calendarInstance = args.view.calendar
+
+        calendarInstance.unselect()
+        if (title) {
+            calendarInstance.addEvent({
+                title,
+                start: args.startStr,
+                end: args.endStr,
+                allDay: args.allDay,
+            })
+        }
+    }
+    const handleDetail = (arg: DateSelectArg) => {
+        const eventUrl = '/event/' + arg.event.id;
+        window.location.href = eventUrl;
     }
     return (
         <>
@@ -27,24 +50,22 @@ export default function Calendar() {
         <div className="grid grid-cols-10">
             <div className="col-span-8">
             <FullCalendar
-                plugins={[
-                dayGridPlugin,
-                interactionPlugin,
-                timeGridPlugin
-                ]}
-                headerToolbar={{
-                left: 'prev, next today',
-                center: 'title',
-                right: 'resourceTimelineWook, dayGridMonth, timeGridWeek'
-                }}
+                plugins={[dayGridPlugin, interactionPlugin]}
                 initialView="dayGridMonth"
-                weekends={true}
+                eventTimeFormat={{
+                hour: '2-digit',
+                minute: '2-digit',
+                hour12: false, // 24時間表記を強制
+                }}
                 events={[
-                {title: 'event 1', date: '2024-12-23'},
-                {title: 'event 2', date: '2024-12-24'}
+                { title: '終日イベント', start: '2024-10-15', end: '2024-10-20' },
+                { title: '時間イベント', start: '2024-10-25T00:00:00Z' },
+                { title: '時間イベント', start: '2024-10-25T09:00:00Z' },
+                { title: 'ハロウィン', start: '2024-10-31' },
                 ]}
-                dateClick={handleDateClick}
-                eventContent={renderEventContent}
+                selectable={true}
+                select={handleDateSelect}
+                eventClick={handleDetail}
             />
             </div>
         </div>
