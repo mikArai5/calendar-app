@@ -2,10 +2,9 @@
 
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
-import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
-import jaLocale from "@fullcalendar/core/locales/ja";
 import { DateSelectArg } from "@fullcalendar/core/index.js";
+import { useRouter } from "next/navigation";
 
 
 
@@ -20,9 +19,6 @@ interface Event {
 
 
 export default function Calendar() {
-    const handleDateClick = (arg: { dateStr: any }) => {
-        alert(arg.dateStr)
-    }
     const handleDateSelect= (args: DateSelectArg) => {
         const title = prompt('予定のタイトルを入力してください')
         const calendarInstance = args.view.calendar
@@ -37,9 +33,16 @@ export default function Calendar() {
             })
         }
     }
-    const handleDetail = (arg: DateSelectArg) => {
-        const eventUrl = '/event/' + arg.event.id;
-        window.location.href = eventUrl;
+    const router = useRouter();
+
+    const query = {
+        id: 1,
+        name: "あいうえお",
+    };
+
+    const handleDetail = (args: DateSelectArg) => {
+        const slug: string = args.event.startStr;
+        router.push({pathname: `/events/${slug}`, query: query});
     }
     return (
         <>
@@ -65,6 +68,7 @@ export default function Calendar() {
                 ]}
                 selectable={true}
                 select={handleDateSelect}
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 eventClick={handleDetail}
             />
             </div>
@@ -72,13 +76,4 @@ export default function Calendar() {
         </main>
         </>
     );
-}
-
-function renderEventContent(eventInfo: any) {
-    return (
-        <>
-            <b>{eventInfo.timeText}</b>
-            <i>{eventInfo.event.title}</i>
-        </>
-    )
 }
