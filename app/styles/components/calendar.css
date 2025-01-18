@@ -1,0 +1,43 @@
+.fc .fc-scrollgrid {
+    border-width: 0 0 0 0; 
+    font-size: 20px;
+    font-weight: normal;
+  }
+  .fc-theme-standard td, .fc-theme-standard th {
+    height: 60px;
+    border: none;
+    padding: 0 5px 5px;
+  }
+
+  .fc .fc-daygrid-day.fc-day-today {
+    background: none;
+  }
+  .fc .fc-daygrid-day.fc-day-today .fc-daygrid-day-frame {
+    background: rgba(49,159,141,0.1);
+  }
+
+  .fc .fc-daygrid-day-frame {
+    height: 100%;
+  }
+
+  .fc .fc-daygrid-day-top {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    min-height: 100%;
+  }
+  .fc .fc-bg-event {
+    opacity: 1;
+  }
+
+  .fc .fc-bg-event .fc-event-title {
+    display: none !important;
+  }
+
+  .fc .fc-daygrid-body-natural .fc-daygrid-day-events {
+    display: none;
+  }
+  .fc .fc-cell-shaded, .fc .fc-day-disabled {
+    background: none;
+  }

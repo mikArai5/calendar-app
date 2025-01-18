@@ -1,13 +1,15 @@
 'use client';
 
-import { useRouter } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 
 export default function Page() {
-    const router = useRouter();
+    const searchParams = useSearchParams();
+    const allQuaryParameters = searchParams.toString();
+    console.log(allQuaryParameters);
     return(
         <>
-            <p>{router.query.id}</p>
-            <p>{router.query.name}</p>
+            <p></p>
+            <p></p>
         </>
     )
 }
