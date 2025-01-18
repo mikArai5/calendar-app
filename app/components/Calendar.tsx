@@ -19,19 +19,20 @@ interface Event {
 
 export default function Calendar() {
     const handleDateSelect= async (args: DateSelectArg) => {
-        const title = prompt('予定のタイトルを入力してください')
-        const calendarInstance = args.view.calendar
+        const title = prompt('予定のタイトルを入力してください');
+        const content = "test";
+        const calendarInstance = args.view.calendar;
 
         calendarInstance.unselect()
         if (title) {
             calendarInstance.addEvent({
                 title,
+                content,
                 start: args.startStr,
                 end: args.endStr,
                 allDay: args.allDay,
             })
-            await addSchedule(title);
-            console.log(title);
+            await addSchedule(title, content);
         }
     }
     const router = useRouter();
