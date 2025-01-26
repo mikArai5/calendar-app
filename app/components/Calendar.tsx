@@ -39,7 +39,7 @@ export default function Calendar() {
 
     const handleDetail = (args: DateSelectArg) => {
         const slug: string = args.event.startStr;
-        router.push( `/events/${slug}?value=slug`);
+        router.push( `/events/${slug}?date=${slug}`);
     }
     return (
         <>
