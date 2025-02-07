@@ -21,3 +21,9 @@ model calendar {
   end     String?
   userId  String?
 }
+
+model todo {
+  id      Int       @id @default(autoincrement()) @db.Integer
+  title   String
+  content String?
+}
