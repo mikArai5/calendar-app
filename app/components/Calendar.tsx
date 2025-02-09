@@ -27,13 +27,12 @@ export default function Calendar() {
     async function fetchSchedules() {
         const { data } = await supabase.from("calendar").select("*");
         setSchedules(data);
-
     }
 
     const handleDateSelect= async (args: DateSelectArg) => {
         const title = prompt('予定のタイトルを入力してください');
-        const start = prompt('予定の開始時刻を入力してください');
-        const end = prompt('予定の終了時刻を入力してください');
+        const start = prompt('予定の開始日を入力してください');
+        const end = prompt('予定の終了日を入力してください');
         const calendarInstance = args.view.calendar;
 
         calendarInstance.unselect()
@@ -44,8 +43,8 @@ export default function Calendar() {
     const router = useRouter();
 
     const handleDetail = (args: DateSelectArg) => {
-        const slug: string = args.event.startStr;
-        router.push( `/events/${slug}?date=${slug}`);
+        const slug: string = args.event.id;
+        router.push( `/events/${slug}`);
     }
 
     return (

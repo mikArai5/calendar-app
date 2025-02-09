@@ -20,6 +20,7 @@
   font-size: 1rem;
 }
 
+
 @media screen and (min-width:769px) {
   .calendar {
     width: 100%;
