@@ -13,9 +13,9 @@ export const getAllSchedules = async () => {
 
 export const updateSchedule = async ( id: string, title: string, start: string, end: string) => {
     await supabase.from('calendar').upsert({
-        'id': id,
-        'title': title,
-        'start': start,
-        'end': end,
+        id: id,
+        title: title,
+        start: start,
+        end: end,
     });
 };

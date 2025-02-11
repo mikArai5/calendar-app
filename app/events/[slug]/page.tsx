@@ -16,18 +16,17 @@ type EditSchedule = {
 }
 
 export default function Page() {
+    const path = usePathname();
+    const scheduleId = path.split('/').pop() as string;
     const [ schedule, setSchedule ] = useState<any>([]);
     const [ editSchedule, setEditSchedule ] = useState<EditSchedule>({
-        id: schedule.id,
+        id: scheduleId,
         title: schedule.title,
         start: schedule.start,
         end: schedule.end,
     });
 
     const router = useRouter();
-
-    const id = usePathname();
-    const scheduleId = id.split('/').pop();
 
     async function fetchSchedule() {
         const { data } = await supabase.from("calendar").select("*").eq('id', scheduleId).single();
@@ -38,26 +37,27 @@ export default function Page() {
         setEditSchedule(schedule);
     }, [schedule]);
 
+    useEffect(() => {
+        fetchSchedule();
+    }, []);
+
     const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const changedScheduleTitle = { ...editSchedule, title: e.target.value };
+        const changedScheduleTitle = { ...editSchedule, title: e.target.value, id: scheduleId };
         setEditSchedule(changedScheduleTitle);
-        console.log(editSchedule);
     }
     const handleStartChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const changedScheduleStart = { ...editSchedule, start: e.target.value };
+        const changedScheduleStart = { ...editSchedule, start: e.target.value, id: scheduleId };
         setEditSchedule(changedScheduleStart);
-        console.log(editSchedule);
     }
     const handleEndChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const changedScheduleEnd = { ...editSchedule, end: e.target.value };
+        const changedScheduleEnd = { ...editSchedule, end: e.target.value, id: scheduleId };
         setEditSchedule(changedScheduleEnd);
-        console.log(editSchedule);
     }
 
     const handleSubmit = async(id: string, title: string, start: string, end: string) => {
         await updateSchedule(id, title, start, end);
         console.log(editSchedule);
-        // router.push('/');
+        router.push('/');
     }
 
 
