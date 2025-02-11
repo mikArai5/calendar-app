@@ -4,6 +4,9 @@ import { useState, useEffect } from "react";
 import { supabase } from "@/utils/supabase";
 import Link from "next/link";
 import './styles/style.css';
+import { updateSchedule } from "@/utils/supabaseFunctions";
+import { useRouter } from "next/navigation";
+
 
 type EditSchedule = {
     id: string;
@@ -18,43 +21,51 @@ export default function Page() {
         id: schedule.id,
         title: schedule.title,
         start: schedule.start,
-        end: schedule.end
+        end: schedule.end,
     });
+
+    const router = useRouter();
+
     const id = usePathname();
     const scheduleId = id.split('/').pop();
 
-    async function fetchSchedules() {
+    async function fetchSchedule() {
         const { data } = await supabase.from("calendar").select("*").eq('id', scheduleId).single();
         setSchedule(data);
     }
 
     useEffect(() => {
-        fetchSchedules();
-    }, [schedule]);
+        fetchSchedule();
+    }, []);
 
     const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const changedScheduleTitle = { ...editSchedule, title: e.target.value };
+        const changedScheduleTitle = { ...schedule, title: e.target.value };
         setEditSchedule(changedScheduleTitle);
     }
     const handleStartChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const changedScheduleStart = { ...editSchedule, title: e.target.value };
+        const changedScheduleStart = { ...schedule, start: e.target.value };
         setEditSchedule(changedScheduleStart);
     }
     const handleEndChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const changedScheduleEnd = { ...editSchedule, title: e.target.value };
+        const changedScheduleEnd = { ...schedule, end: e.target.value };
         setEditSchedule(changedScheduleEnd);
     }
+
+    const handleSubmit = async(id: string, title: string, start: string, end: string) => {
+        await updateSchedule(id, title, start, end);
+        // router.push('/');
+    }
+    console.log(editSchedule);
 
     return(
         <>
         <div className="inputArea">
-            <p>{schedule?.title}</p>
             <div>
                 <label htmlFor="title">予定</label>
                 <input 
                     id="title"
                     type="text"
-                    value={editSchedule?.title}
+                    defaultValue={schedule.title}
                     onChange={handleTitleChange}
                 />
             </div>
@@ -63,7 +74,7 @@ export default function Page() {
                 <input
                     id="start"
                     type="date"
-                    value={editSchedule?.start}
+                    defaultValue={schedule.start}
                     onChange={handleStartChange}
                 />
             </div>
@@ -72,11 +83,12 @@ export default function Page() {
                 <input
                     id="end"
                     type="date"
-                    value={editSchedule?.end}
+                    defaultValue={schedule.end}
                     onChange={handleEndChange}
                 />
             </div>
         </div>
+        <span onClick={()=> handleSubmit(editSchedule.id, editSchedule.title, editSchedule.start, editSchedule.end)}>更新</span>
         <Link href="/">戻る</Link>
         </>
     )
