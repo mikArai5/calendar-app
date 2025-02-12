@@ -25,8 +25,13 @@ type Schedule = {
 export default function Page() {
     const path = usePathname();
     const scheduleId = path.split('/').pop() as string;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const [ schedule, setSchedule ] = useState<any>([]);
+
+    const [ schedule, setSchedule ] = useState<Schedule>({
+        id: '',
+        title: '',
+        start: '',
+        end: '',
+    });
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [ schedules, setSchedules ] = useState<Schedule[]>([]);
