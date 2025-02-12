@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { supabase } from "@/utils/supabase";
 import Link from "next/link";
 import './styles/style.css';
-import { updateSchedule } from "@/utils/supabaseFunctions";
+import { deleteSchedule, getAllSchedules, updateSchedule } from "@/utils/supabaseFunctions";
 import { useRouter } from "next/navigation";
 
 
@@ -20,6 +20,7 @@ export default function Page() {
     const scheduleId = path.split('/').pop() as string;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const [ schedule, setSchedule ] = useState<any>([]);
+    const [ schedules, setSchedules ] = useState<any>([]);
     const [ editSchedule, setEditSchedule ] = useState<EditSchedule>({
         id: scheduleId,
         title: schedule.title,
@@ -60,6 +61,13 @@ export default function Page() {
         router.push('/');
     }
 
+    const handleDelete = async (id: string) => {
+        await deleteSchedule(id);
+        const schedules = await getAllSchedules();
+        setSchedules(schedules);
+        router.push('/');
+    }
+
     return(
         <>
         <div className="inputArea">
@@ -92,6 +100,7 @@ export default function Page() {
             </div>
         </div>
         <span onClick={()=> handleSubmit(editSchedule.id, editSchedule.title, editSchedule.start, editSchedule.end)}>更新</span>
+        <span onClick={()=> handleDelete(schedule.id)}>削除</span>
         <Link href="/">戻る</Link>
         </>
     )

@@ -19,3 +19,7 @@ export const updateSchedule = async ( id: string, title: string, start: string, 
         end: end,
     });
 };
+
+export const deleteSchedule = async (id: string) => {
+    await supabase.from('calendar').delete().eq('id', id);
+};
