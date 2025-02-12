@@ -3,7 +3,7 @@
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
-import { DateSelectArg } from "@fullcalendar/core/index.js";
+import { DateSelectArg, EventClickArg } from "@fullcalendar/core/index.js";
 import { useRouter } from "next/navigation";
 import { addSchedule } from "@/utils/supabaseFunctions";
 import { useEffect, useState } from "react";
@@ -37,7 +37,7 @@ export default function Calendar() {
     }
     const router = useRouter();
 
-    const handleDetail = (args: DateSelectArg) => {
+    const handleDetail = (args: EventClickArg) => {
         const slug: string = args.event.id;
         router.push( `/events/${slug}`);
     }
