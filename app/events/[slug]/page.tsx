@@ -32,7 +32,7 @@ export default function Page() {
         start: '',
         end: '',
     });
-s
+
     const [ schedules, setSchedules ] = useState<Schedule[]>([]);
     const [ editSchedule, setEditSchedule ] = useState<EditSchedule>({
         id: scheduleId,
