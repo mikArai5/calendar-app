@@ -32,8 +32,7 @@ export default function Page() {
         start: '',
         end: '',
     });
-
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+s
     const [ schedules, setSchedules ] = useState<Schedule[]>([]);
     const [ editSchedule, setEditSchedule ] = useState<EditSchedule>({
         id: scheduleId,
