@@ -12,6 +12,7 @@ import '../styles/components/calendar.css';
 
 
 export default function Calendar() {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const [ schedules, setSchedules ] = useState<any>([]);
 
     useEffect(() => {
@@ -25,8 +26,8 @@ export default function Calendar() {
 
     const handleDateSelect= async (args: DateSelectArg) => {
         const title = prompt('予定のタイトルを入力してください');
-        const start = prompt('予定の開始日を入力してください');
-        const end = prompt('予定の終了日を入力してください');
+        const start = prompt('予定の開始日を入力してください') as string;
+        const end = prompt('予定の終了日を入力してください') as string;
         const calendarInstance = args.view.calendar;
 
         calendarInstance.unselect()
