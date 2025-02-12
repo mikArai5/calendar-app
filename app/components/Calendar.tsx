@@ -10,12 +10,6 @@ import { useEffect, useState } from "react";
 import { supabase } from "../../utils/supabase";
 import '../styles/components/calendar.css';
 
-interface Event {
-    title:string;
-    start: Date | string;
-    allday: boolean;
-    id: number
-}
 
 export default function Calendar() {
     const [ schedules, setSchedules ] = useState<any>([]);
