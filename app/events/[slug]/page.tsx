@@ -42,24 +42,22 @@ export default function Page() {
     }, []);
 
     const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const changedScheduleTitle = { ...editSchedule, title: e.target.value, id: scheduleId };
+        const changedScheduleTitle = { ...editSchedule, title: e.target.value};
         setEditSchedule(changedScheduleTitle);
     }
     const handleStartChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const changedScheduleStart = { ...editSchedule, start: e.target.value, id: scheduleId };
+        const changedScheduleStart = { ...editSchedule, start: e.target.value };
         setEditSchedule(changedScheduleStart);
     }
     const handleEndChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const changedScheduleEnd = { ...editSchedule, end: e.target.value, id: scheduleId };
+        const changedScheduleEnd = { ...editSchedule, end: e.target.value };
         setEditSchedule(changedScheduleEnd);
     }
 
     const handleSubmit = async(id: string, title: string, start: string, end: string) => {
         await updateSchedule(id, title, start, end);
-        console.log(editSchedule);
         router.push('/');
     }
-
 
     return(
         <>
