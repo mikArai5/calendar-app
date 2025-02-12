@@ -20,7 +20,7 @@ export default function Page() {
     const scheduleId = path.split('/').pop() as string;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const [ schedule, setSchedule ] = useState<any>([]);
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any
     const [ schedules, setSchedules ] = useState<any>([]);
     const [ editSchedule, setEditSchedule ] = useState<EditSchedule>({
         id: scheduleId,
