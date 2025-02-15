@@ -1,6 +1,6 @@
 'use client';
 import { usePathname } from "next/navigation";
-import { useState, useEffect, SetStateAction } from "react";
+import { useState, useEffect } from "react";
 import { supabase } from "@/utils/supabase";
 import Link from "next/link";
 import './styles/style.css';
@@ -22,12 +22,7 @@ type Schedule = {
     end: string;
 }
 
-type Schedules = {
-    id: string;
-    title: string;
-    start: string;
-    end: string;
-}
+type Schedules = Schedule[];
 
 export default function Page() {
     const path = usePathname();
@@ -40,12 +35,8 @@ export default function Page() {
         end: '',
     });
 
-    const [ schedules, setSchedules ] = useState<Schedules>({
-        id: '',
-        title: '',
-        start: '',
-        end: '',
-    });
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const [ schedules, setSchedules ] = useState<Schedules>([]);
     const [ editSchedule, setEditSchedule ] = useState<EditSchedule>({
         id: scheduleId,
         title: schedule.title,
