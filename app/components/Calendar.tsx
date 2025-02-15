@@ -8,20 +8,41 @@ import { useRouter } from "next/navigation";
 import { addSchedule } from "@/utils/supabaseFunctions";
 import { useEffect, useState } from "react";
 import { supabase } from "../../utils/supabase";
+import { PostgrestResponse } from "@supabase/supabase-js";
 import '../styles/components/calendar.css';
 
+type Schedule = {
+    id: string;
+    title: string;
+    start: string;
+    end: string;
+}
+type Schedules = Schedule[];
 
 export default function Calendar() {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const [ schedules, setSchedules ] = useState<any>([]);
+
+    const [ schedules, setSchedules ] = useState<Schedules>([]);
 
     useEffect(() => {
         fetchSchedules();
+        
     }, [schedules]);
 
     async function fetchSchedules() {
-        const { data } = await supabase.from("calendar").select("*");
-        setSchedules(data);
+        try {
+            const { data, error }: PostgrestResponse<Schedule> = await supabase
+                .from("calendar")
+                .select("*");
+    
+            if (error) {
+                console.error('Error fetching schedules:', error);
+                return;
+            }
+    
+            setSchedules(data);
+        } catch (err) {
+            console.error('Error fetching schedules:', err);
+        }
     }
 
     const handleDateSelect= async (args: DateSelectArg) => {
