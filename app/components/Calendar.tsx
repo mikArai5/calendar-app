@@ -31,9 +31,12 @@ export default function Calendar() {
 
     async function fetchSchedules() {
         try {
+            const user = await fetchUserInfo();
+            const userId = user?.id as string;
             const { data, error }: PostgrestResponse<Schedule> = await supabase
                 .from("calendar")
-                .select("*");
+                .select("*")
+                .eq('userId', userId);
     
             if (error) {
                 console.error('Error fetching schedules:', error);
