@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 import { supabase } from "../../utils/supabase";
 import { PostgrestResponse } from "@supabase/supabase-js";
 import '../styles/components/calendar.css';
+import { fetchUserInfo } from "@/app/actions";
 
 type Schedule = {
     id: string;
@@ -45,32 +46,17 @@ export default function Calendar() {
         }
     }
 
-    async function fetchUserInfo() {
-        try {
-            const { data: { user }, error } = await supabase.auth.getUser();
-            if (error) {
-                console.error('Error fetching user:', error);
-            } else {
-                console.log(user);
-            }
-        } catch (err) {
-            console.error('Error in getUser:', err);
-        }
-    }
-
-    useEffect(() => {
-        fetchUserInfo();
-    },[]);
-
     const handleDateSelect= async (args: DateSelectArg) => {
         const title = prompt('予定のタイトルを入力してください');
         const start = prompt('予定の開始日を入力してください') as string;
         const end = prompt('予定の終了日を入力してください') as string;
         const calendarInstance = args.view.calendar;
+        const user = await fetchUserInfo();
+        const userId = user?.id;
 
         calendarInstance.unselect()
         if (title) {
-            await addSchedule(title, start, end);
+            await addSchedule(title, start, end, userId);
         }
     }
     const router = useRouter();
