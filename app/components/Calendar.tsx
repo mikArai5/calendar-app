@@ -52,7 +52,7 @@ export default function Calendar() {
         const end = prompt('予定の終了日を入力してください') as string;
         const calendarInstance = args.view.calendar;
         const user = await fetchUserInfo();
-        const userId = user?.id;
+        const userId = user?.id as string;
 
         calendarInstance.unselect()
         if (title) {
