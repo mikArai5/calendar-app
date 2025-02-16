@@ -45,6 +45,23 @@ export default function Calendar() {
         }
     }
 
+    async function fetchUserInfo() {
+        try {
+            const { data: { user }, error } = await supabase.auth.getUser();
+            if (error) {
+                console.error('Error fetching user:', error);
+            } else {
+                console.log(user);
+            }
+        } catch (err) {
+            console.error('Error in getUser:', err);
+        }
+    }
+
+    useEffect(() => {
+        fetchUserInfo();
+    },[]);
+
     const handleDateSelect= async (args: DateSelectArg) => {
         const title = prompt('予定のタイトルを入力してください');
         const start = prompt('予定の開始日を入力してください') as string;
