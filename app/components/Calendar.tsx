@@ -26,12 +26,15 @@ export default function Calendar() {
 
     useEffect(() => {
         fetchSchedules();
-        
     }, [schedules]);
 
     async function fetchSchedules() {
         try {
             const user = await fetchUserInfo();
+            if (!user?.id) {
+                console.error('Useridが見つかりません');
+                return;
+            }
             const userId = user?.id as string;
             const { data, error }: PostgrestResponse<Schedule> = await supabase
                 .from("calendar")
