@@ -24,18 +24,23 @@ export default function Calendar() {
 
     const [ schedules, setSchedules ] = useState<Schedules>([]);
 
+    // 予定が追加されたタイミングで全ての予定取得
     useEffect(() => {
         fetchSchedules();
     }, [schedules]);
 
+    // ログインしたユーザーが登録した予定のみ表示
     async function fetchSchedules() {
         try {
+            // ログインしているユーザーの情報を取得
             const user = await fetchUserInfo();
             if (!user?.id) {
                 console.error('Useridが見つかりません');
                 return;
             }
             const userId = user?.id as string;
+
+            // ログインしているユーザーのIDと一致する投稿のみを取得
             const { data, error }: PostgrestResponse<Schedule> = await supabase
                 .from("calendar")
                 .select("*")
@@ -46,6 +51,7 @@ export default function Calendar() {
                 return;
             }
     
+            // schedulesを更新
             setSchedules(data);
         } catch (err) {
             console.error('Error fetching schedules:', err);
@@ -53,20 +59,27 @@ export default function Calendar() {
     }
 
     const handleDateSelect= async (args: DateSelectArg) => {
+
+        // 登録した予定・開始日・終了日の入力値を取得して代入
         const title = prompt('予定のタイトルを入力してください');
         const start = prompt('予定の開始日を入力してください') as string;
         const end = prompt('予定の終了日を入力してください') as string;
         const calendarInstance = args.view.calendar;
+        // ログインしているユーザーのIDを取得して代入
         const user = await fetchUserInfo();
         const userId = user?.id as string;
 
-        calendarInstance.unselect()
+        // 選択状態を解除
+        calendarInstance.unselect();
+
+        // 登録した予定・開始日・終了日・ログインしているユーザーのIDをsupabaseに登録
         if (title) {
             await addSchedule(title, start, end, userId);
         }
     }
     const router = useRouter();
 
+    // 追加・表示した予定を押したら詳細ページに遷移
     const handleDetail = (args: EventClickArg) => {
         const slug: string = args.event.id;
         router.push( `/events/${slug}`);

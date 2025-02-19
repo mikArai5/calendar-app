@@ -1,5 +1,6 @@
 import { createBrowserClient } from "@supabase/ssr";
 
+// supabaseに接続
 export function createClient() {
     return createBrowserClient(
         process.env.NEXT_PUBLIC_SUPABASE_URL!,

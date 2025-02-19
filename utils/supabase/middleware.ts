@@ -1,6 +1,8 @@
 import { createServerClient } from '@supabase/ssr'
 import { NextResponse, type NextRequest } from 'next/server'
 
+// サーバー コンポーネントは Cookie を書き込むことができないので
+// 期限切れの認証トークンを更新して保存するために作成
 export async function updateSession(request: NextRequest) {
   let supabaseResponse = NextResponse.next({
     request,
