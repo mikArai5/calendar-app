@@ -1,5 +1,6 @@
 "use client";
 import Calendar from "@/app/components/Calendar";
+import './styles/style.css';
 
 export default function Home() {
   return (

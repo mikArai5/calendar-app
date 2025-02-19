@@ -98,38 +98,44 @@ export default function Page() {
 
     return(
         <>
-        <div className="inputArea">
-            <div>
-                <label htmlFor="title">予定</label>
-                <input 
-                    id="title"
-                    type="text"
-                    defaultValue={schedule.title}
-                    onChange={handleTitleChange}
-                />
-            </div>
-            <div>
-                <label htmlFor="start">開始日</label>
-                <input
-                    id="start"
-                    type="date"
-                    defaultValue={schedule.start}
-                    onChange={handleStartChange}
-                />
-            </div>
-            <div>
-                <label htmlFor="end">終了日</label>
-                <input
-                    id="end"
-                    type="date"
-                    defaultValue={schedule.end}
-                    onChange={handleEndChange}
-                />
+        <div className="detail">
+            <div className="detail__inner">
+                <ul className="inputArea">
+                    <li>
+                        <label htmlFor="title">予定</label>
+                        <input 
+                            id="title"
+                            type="text"
+                            defaultValue={schedule.title}
+                            onChange={handleTitleChange}
+                        />
+                    </li>
+                    <li>
+                        <label htmlFor="start">開始日</label>
+                        <input
+                            id="start"
+                            type="date"
+                            defaultValue={schedule.start}
+                            onChange={handleStartChange}
+                        />
+                    </li>
+                    <li>
+                        <label htmlFor="end">終了日</label>
+                        <input
+                            id="end"
+                            type="date"
+                            defaultValue={schedule.end}
+                            onChange={handleEndChange}
+                        />
+                    </li>
+                </ul>
+                <div className="buttons">
+                    <span className="update" onClick={()=> handleSubmit(editSchedule.id, editSchedule.title, editSchedule.start, editSchedule.end)}>更新</span>
+                    <span className="delete" onClick={()=> handleDelete(schedule.id)}>削除</span>
+                    <Link className="back" href="/">戻る</Link>
+                </div>
             </div>
         </div>
-        <span onClick={()=> handleSubmit(editSchedule.id, editSchedule.title, editSchedule.start, editSchedule.end)}>更新</span>
-        <span onClick={()=> handleDelete(schedule.id)}>削除</span>
-        <Link href="/">戻る</Link>
         </>
     )
 }
