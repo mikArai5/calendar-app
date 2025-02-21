@@ -6,7 +6,8 @@ import Link from "next/link";
 import './styles/style.css';
 import { deleteSchedule, getAllSchedules, updateSchedule } from "@/utils/supabaseFunctions";
 import { useRouter } from "next/navigation";
-
+import { PostgrestResponse } from "@supabase/supabase-js";
+import { fetchUserInfo } from "@/app/actions";
 
 type EditSchedule = {
     id: string;
@@ -38,6 +39,7 @@ export default function Page() {
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [ schedules, setSchedules ] = useState<Schedules>([]);
+    const [ otherSchedules, setOtherSchedules ] = useState<Schedules>([]);
     const [ editSchedule, setEditSchedule ] = useState<EditSchedule>({
         id: scheduleId,
         title: schedule.title,
@@ -56,6 +58,7 @@ export default function Page() {
     // scheduleの値が更新されたらsetEditScheduleにscheduleの値を入れる
     useEffect(() => {
         setEditSchedule(schedule);
+        fetchOtherSchedule();
     }, [schedule]);
     
     // 初回レンダリング時に登録ずみの全ての予定を取得
@@ -96,6 +99,39 @@ export default function Page() {
         router.push('/');
     }
 
+    async function fetchOtherSchedule() {
+        try {
+            // ログインしているユーザーの情報を取得
+            const user = await fetchUserInfo();
+            if (!user?.id) {
+                console.error('Useridが見つかりません');
+                return;
+            }
+            const userId = user?.id as string;
+
+            // ログインしているユーザーのIDと一致する投稿のみを取得
+            const { data, error }: PostgrestResponse<Schedule> = await supabase
+                .from("calendar")
+                .select("*")
+                .match({'userId': userId, 'start': schedule.start })
+                .neq('id', schedule.id);
+
+            if(data === null && undefined) {
+                return;
+            }
+    
+            if (error) {
+                console.error('Error fetching schedules:', error);
+                return;
+            }
+            setOtherSchedules(data);
+            console.log(otherSchedules);
+        } catch (err) {
+            console.error('Error fetching schedules:', err);
+        }
+    }
+
+
     return(
         <>
         <div className="detail">
@@ -133,6 +169,14 @@ export default function Page() {
                     <span className="update" onClick={()=> handleSubmit(editSchedule.id, editSchedule.title, editSchedule.start, editSchedule.end)}>更新</span>
                     <span className="delete" onClick={()=> handleDelete(schedule.id)}>削除</span>
                     <Link className="back" href="/">戻る</Link>
+                </div>
+                <div className="otherSchedules">
+                    <p>同じ日の予定：</p>
+                    <ul>
+                        {otherSchedules?.map((otherSchedule) => (
+                            <li key={otherSchedule.id}>{otherSchedule?.title}</li>
+                        ))}
+                    </ul>
                 </div>
             </div>
         </div>
