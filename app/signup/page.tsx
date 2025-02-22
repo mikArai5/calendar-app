@@ -1,10 +1,13 @@
+'use client';
 import { signup } from "./actions"
 import Link from "next/link";
 import './styles/style.css'
+import Header from "../components/Header";
 
 export default function SignupPage() {
     return (
         <>
+        <Header/>
         <div className="signup">
             <div className="signup__inner">
                 <h1>Sign up</h1>
