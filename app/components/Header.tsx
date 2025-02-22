@@ -12,7 +12,7 @@ export default function Header () {
             if (logoutError) {
                 throw logoutError;
             }
-            await router.push('/login');
+            await router.push('/');
         } catch {
             alert('エラーが発生しました')
         }
