@@ -20,45 +20,37 @@ type Schedule = {
 }
 type Schedules = Schedule[];
 
-export default function Calendar() {
+interface CalendarProps {
+    userId: string;
+}
 
+const Calendar: React.FC<CalendarProps> = ({ userId }) => {
     const [ schedules, setSchedules ] = useState<Schedules>([]);
-    const [userId, setUserId] = useState("");
     // 予定が追加されたタイミングで全ての予定取得
 
-    useEffect(() => {
-        const getUserId = async () => {
-            const user = await fetchUserInfo();
-            const id = user?.id as string;
-            setUserId(id);
-        }
-        getUserId();
-    },[])
-
-    if (userId) {
-        const fetchSchedules = async() => {
-            try {
-                // ログインしているユーザーのIDと一致する投稿のみを取得
-                const { data, error }: PostgrestResponse<Schedule> = await supabase
-                    .from("calendar")
-                    .select("*")
-                    .eq("userId", userId)
-
-                if (error) {
-                    console.error("Error fetching schedules:", error);
-                    return;
-                }
-
-                // schedulesを更新
-                setSchedules(data);
-            } catch (err) {
-                console.error("Error fetching schedules:", err);
-            }
-        }
+    useEffect(()=> {
         fetchSchedules();
+    }, [schedules]);
+
+    async function fetchSchedules() {
+        try {
+            // ログインしているユーザーのIDと一致する投稿のみを取得
+            const { data, error }: PostgrestResponse<Schedule> = await supabase
+                .from("calendar")
+                .select("*")
+                .eq("userId", userId)
+
+            if (error) {
+                console.error("Error fetching schedules:", error);
+                return;
+            }
+
+            // schedulesを更新
+            setSchedules(data);
+        } catch (err) {
+            console.error("Error fetching schedules:", err);
+        }
     }
-
-
 
     const handleDateSelect= async (args: DateSelectArg) => {
 
@@ -106,3 +98,4 @@ export default function Calendar() {
         </>
     );
 }
+export default Calendar;
