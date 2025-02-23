@@ -25,7 +25,9 @@ export default function Header () {
         <div className="flex justify-between mb-12 border-b border-violet-100 p-4">
         <h1 className="font-bold text-2xl text-gray-700">Calendar</h1>
         { userId && (
-            <button formAction={logout} className='logoutButton'>Log out</button>
+            <form>
+                <button formAction={logout} className='logoutButton'>Log out</button>
+            </form>
         )}
         </div>
     )
