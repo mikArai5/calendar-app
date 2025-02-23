@@ -98,6 +98,7 @@ export default function Page() {
 
     // 削除ボタンを押したら表示中の予定を削除し、一覧画面に戻る
     const handleDelete = async (id: string) => {
+        // データ削除
         await deleteSchedule(id);
         // 削除されていないテーブルのデータを全て取得・表示
         const schedules = await getAllSchedules();

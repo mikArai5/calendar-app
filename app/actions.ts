@@ -10,6 +10,7 @@ export const fetchUserInfo = async () => {
     return user;
 };
 
+// ログアウト関数
 export async function logout() {
     const supabase = await createClient()
     const { error: logoutError } = await supabase.auth.signOut();

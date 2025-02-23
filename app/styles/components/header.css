@@ -1,3 +1,7 @@
+.header {
+    padding: 0.71rem;
+    margin-bottom: 2.67%;
+}
 .logoutButton {
     width: 100%;
     padding: 3px 10px;
@@ -11,5 +15,13 @@
 @media screen and (min-width: 769px) {
     .logoutButton {
         font-size: min(16px, 2.42vw);
+        width: 100px;
+    }
+    h1 {
+        font-size: min(32px, 2.5vw);
+    }
+    .header {
+        padding: min(10px, 0.78vw);
+        margin-bottom: min(30px, 2.34vw);
     }
 }

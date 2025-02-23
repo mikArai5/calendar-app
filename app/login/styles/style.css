@@ -101,4 +101,8 @@ form button {
     .link {
         font-size: min(14px, 2.12vw);
     }
+
+    .error {
+        font-size: min(12px, 0.94vw);
+    }
 }

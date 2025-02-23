@@ -5,7 +5,7 @@
 
 .calendar__inner {
   width: 100%;
-  padding: 0 5.33vw;
+  padding: 5.33%;
 }
 
 .fc .fc-toolbar-title {
@@ -24,17 +24,33 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-direction: column;
   margin-bottom: 10px;
+}
+
+.inputForm__date {
+  display: contents;
+}
+
+.inputForm .inputForm__item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 5px;
 }
 
 .inputForm .inputForm__item input {
   border: 1px solid #f0f0f0;
   border-radius: 3px;
   padding: 3px 10px;
+  width: 80%;
+  color: #000;
 }
 
 .inputForm .inputForm__item label {
   margin-right: 10px;
+  width: 20%;
 }
 
 .inputForm .inputForm__item .schedule__title {
@@ -46,6 +62,15 @@
   padding: 4.5px 10px;
   border-radius: 3px;
   color: #fff;
+  width: 100%;
+}
+
+.title {
+  width: 100%;
+}
+
+.fc .fc-toolbar.fc-header-toolbar {
+  margin-bottom: 0.71rem;
 }
 
 @media screen and (min-width:769px) {
@@ -56,7 +81,66 @@
   .calendar__inner {
     padding: 0 20px;
     margin: 0 auto;
-    width: 62.5vw;
-    max-width: 800px;
+    width: 71.88vw;
+    max-width: 920px;
+  }
+
+  .inputForm__date {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+  
+  .inputForm__date .inputForm__item {
+    width: 49%;
+  }
+  .inputForm .inputForm__item label {
+    width: 20%;
+    font-size: min(16px, 1.25vw);
+  }
+  .inputForm .inputForm__item.inputForm__title label {
+    width: 10%;
+    font-size: min(16px, 1.25vw);
+  }
+  .inputForm .inputForm__item input {
+    width: 80%;
+    font-size: min(16px, 1.25vw);
+  }
+  .inputForm .inputForm__item.inputForm__title input {
+    width: 94%;
+    font-size: min(16px, 1.25vw);
+  }
+
+  .fc .fc-toolbar-title {
+    font-size: min(32px, 2.5vw);
+  }
+  
+  .fc .fc-col-header-cell-cushion {
+    font-size: min(16px, 1.25vw);
+  }
+  
+  .fc .fc-daygrid-day-number {
+    font-size: min(16px, 1.25vw);
+  }
+
+  .inputForm .addButton {
+    font-size: min(16px, 1.25vw);
+  }
+
+  .fc .fc-button {
+    font-size: min(20px, 1.56vw);
+  }
+
+  .fc-h-event .fc-event-title {
+    font-size: min(16px, 1.25vw);
+  }
+
+  form button {
+    margin: 0;
+  }
+
+  .fc .fc-toolbar.fc-header-toolbar {
+    margin-bottom: min(10px, 0.78vw);
   }
 }
