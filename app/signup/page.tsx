@@ -1,6 +1,5 @@
 'use client';
 import { signup } from "./actions"
-import Link from "next/link";
 import './styles/style.css'
 import Header from "../components/Header";
 import { useForm, SubmitHandler } from "react-hook-form";
@@ -66,7 +65,7 @@ export default function SignupPage() {
                     <button type="submit" disabled={!isValid}>Sign up</button>
                 </form>
                 <div className="link">
-                    新規登録がまだの方は<Link href="/signup">こちら</Link>
+                    新規登録がまだの方は<a href="/login">こちら</a>
                 </div>
             </div>
         </div>

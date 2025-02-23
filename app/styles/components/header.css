@@ -1,9 +1,15 @@
 .logoutButton {
-    width: 100px;
+    width: 100%;
     padding: 3px 10px;
     font-size: 0.88rem;
     background-color: #164a84;
     color: #fff;
     border-radius: 0.31rem;
     cursor: pointer;
+}
+
+@media screen and (min-width: 769px) {
+    .logoutButton {
+        font-size: min(16px, 2.42vw);
+    }
 }
