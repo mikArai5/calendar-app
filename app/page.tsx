@@ -18,10 +18,6 @@ export default function Home() {
     getUserId();
   }, []); 
 
-  if (!id) {
-    return console.log('idがありません');
-  }
-
   const userId = id;
 
   return (
