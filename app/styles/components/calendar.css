@@ -24,17 +24,33 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-direction: column;
   margin-bottom: 10px;
+}
+
+.inputForm__date {
+  display: contents;
+}
+
+.inputForm .inputForm__item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 5px;
 }
 
 .inputForm .inputForm__item input {
   border: 1px solid #f0f0f0;
   border-radius: 3px;
   padding: 3px 10px;
+  width: 80%;
+  color: #000;
 }
 
 .inputForm .inputForm__item label {
   margin-right: 10px;
+  width: 20%;
 }
 
 .inputForm .inputForm__item .schedule__title {
@@ -46,6 +62,11 @@
   padding: 4.5px 10px;
   border-radius: 3px;
   color: #fff;
+  width: 100%;
+}
+
+.title {
+  width: 100%;
 }
 
 @media screen and (min-width:769px) {
@@ -56,7 +77,28 @@
   .calendar__inner {
     padding: 0 20px;
     margin: 0 auto;
-    width: 62.5vw;
-    max-width: 800px;
+    width: 51.56vw;
+    max-width: 660px;
+  }
+
+  .inputForm__date {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+  
+  .inputForm__date .inputForm__item {
+    width: 49%;
+  }
+  
+  .inputForm .inputForm__item.inputForm__title label {
+    width: 10%;
+    font-size: 1rem;
+  }
+  
+  .inputForm .inputForm__item.inputForm__title input {
+    width: 94%;
+    font-size: 1rem;
   }
 }

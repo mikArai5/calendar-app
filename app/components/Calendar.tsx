@@ -81,6 +81,31 @@ const Calendar: React.FC<CalendarProps> = ({ userId }) => {
 
     return (
         <>
+        <form className="inputForm">
+            <div className="inputForm__item inputForm__title">
+                <label htmlFor="title">タイトル</label>
+                <input id="title" type="text" className="title" />
+            </div>
+            <div className="inputForm__date">
+                <div className="inputForm__item">
+                    <label htmlFor="start">開始日</label>
+                    <input
+                        id="start"
+                        type="date"
+                        className="start"
+                    />
+                </div>
+                <div className="inputForm__item">
+                    <label htmlFor="end">終了日</label>
+                    <input
+                        id="end"
+                        type="date"
+                        className="end"
+                    />
+                </div>
+            </div>
+            <button className="addButton">追加</button>
+        </form>
         <FullCalendar
             plugins={[dayGridPlugin, interactionPlugin]}
             initialView="dayGridMonth"
@@ -94,6 +119,9 @@ const Calendar: React.FC<CalendarProps> = ({ userId }) => {
             select={handleDateSelect}
             eventClick={handleDetail}
             contentHeight={"auto"}
+            aspectRatio={1.6}
+            businessHours={{ daysOfWeek: [1, 2, 3, 4, 5] }}
+            firstDay={1}
         />
         </>
     );
