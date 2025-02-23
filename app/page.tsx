@@ -22,7 +22,7 @@ export default function Home() {
 
   return (
     <>
-      <Header />
+      <Header userId={userId} />
       <main>
         <div className="calendar">
           <div className="calendar__inner">
