@@ -49,8 +49,18 @@ export default function Page() {
 
     // urlから取得したidと一致するスケジュールを取得
     async function fetchSchedule() {
-        const { data } = await supabase.from("calendar").select("*").eq('id', scheduleId).single();
-        setSchedule(data);
+        try {
+            const { data, error } = await supabase.from("calendar").select("*").eq('id', scheduleId).single();
+
+            if (error) {
+                console.error("Error fetching schedules:", error);
+                return;
+            }
+            setSchedule(data);
+        } catch (err) {
+            console.error("Error fetching schedules:", err);
+        }
+
     }
 
     // scheduleの値が更新されたらsetEditScheduleにscheduleの値を入れる
