@@ -1,16 +1,16 @@
 'use client';
-import { login } from "./actions"
+import { signup } from "./actions"
 import Link from "next/link";
 import './styles/style.css'
 import Header from "../components/Header";
 
-export default function LoginPage() {
+export default function SignupPage() {
     return (
         <>
         <Header/>
-        <div className="login">
-            <div className="login__inner">
-            <h1>Log in</h1>
+        <div className="signup">
+            <div className="signup__inner">
+                <h1>Sign up</h1>
                 <form>
                     <div>
                         <label htmlFor="email">Email:</label>
@@ -20,10 +20,10 @@ export default function LoginPage() {
                         <label htmlFor="password">Password:</label>
                         <input id="password" name="password" type="password" required />
                     </div>
-                    <button formAction={login}>Log in</button>
+                    <button formAction={signup}>Sign up</button>
                 </form>
                 <div className="link">
-                    新規登録がまだの方は<Link href="/signup">こちら</Link>
+                    登録済みの方は<Link href="/login">こちら</Link>
                 </div>
             </div>
         </div>

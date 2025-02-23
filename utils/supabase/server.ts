@@ -1,10 +1,10 @@
-import { createServerClient, type CookieOptions } from "@supabase/ssr";
+import { createServerClient } from "@supabase/ssr";
 import { cookies } from "next/headers";
 
 export async function createClient() {
     // Supabase クライアントに Cookie へのアクセス方法を伝え、
     // ユーザー セッション データの読み取りと書き込みを可能にする
-    const cookieStore = await cookies()
+    const cookieStore = await cookies();
 
     return createServerClient(
         process.env.NEXT_PUBLIC_SUPABASE_URL!,
