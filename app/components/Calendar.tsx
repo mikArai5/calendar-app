@@ -3,7 +3,7 @@
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
-import { DateSelectArg, EventClickArg } from "@fullcalendar/core/index.js";
+import { EventClickArg } from "@fullcalendar/core/index.js";
 import { useRouter } from "next/navigation";
 import { addSchedule } from "@/utils/supabaseFunctions";
 import { useEffect, useState } from "react";
