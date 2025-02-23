@@ -9,7 +9,7 @@ import { addSchedule } from "@/utils/supabaseFunctions";
 import { useEffect, useState } from "react";
 import { supabase } from "../../utils/supabase";
 import { PostgrestResponse } from "@supabase/supabase-js";
-import '../styles/components/calendar.css';
+import "../styles/components/calendar.css";
 import { fetchUserInfo } from "@/app/actions";
 
 type Schedule = {
@@ -20,50 +20,44 @@ type Schedule = {
 }
 type Schedules = Schedule[];
 
-export default function Calendar() {
+interface CalendarProps {
+    userId: string;
+}
 
+const Calendar: React.FC<CalendarProps> = ({ userId }) => {
     const [ schedules, setSchedules ] = useState<Schedules>([]);
-
     // 予定が追加されたタイミングで全ての予定取得
-    useEffect(() => {
+
+    useEffect(()=> {
         fetchSchedules();
     }, [schedules]);
 
-    // ログインしたユーザーが登録した予定のみ表示
     async function fetchSchedules() {
         try {
-            // ログインしているユーザーの情報を取得
-            const user = await fetchUserInfo();
-            if (!user?.id) {
-                console.error('Useridが見つかりません');
-                return;
-            }
-            const userId = user?.id as string;
-
             // ログインしているユーザーのIDと一致する投稿のみを取得
             const { data, error }: PostgrestResponse<Schedule> = await supabase
                 .from("calendar")
                 .select("*")
-                .eq('userId', userId);
-    
+                .eq("userId", userId)
+
             if (error) {
-                console.error('Error fetching schedules:', error);
+                console.error("Error fetching schedules:", error);
                 return;
             }
-    
+
             // schedulesを更新
             setSchedules(data);
         } catch (err) {
-            console.error('Error fetching schedules:', err);
+            console.error("Error fetching schedules:", err);
         }
     }
 
     const handleDateSelect= async (args: DateSelectArg) => {
 
         // 登録した予定・開始日・終了日の入力値を取得して代入
-        const title = prompt('予定のタイトルを入力してください');
-        const start = prompt('予定の開始日を入力してください') as string;
-        const end = prompt('予定の終了日を入力してください') as string;
+        const title = prompt("予定のタイトルを入力してください");
+        const start = prompt("予定の開始日を入力してください") as string;
+        const end = prompt("予定の終了日を入力してください") as string;
         const calendarInstance = args.view.calendar;
         // ログインしているユーザーのIDを取得して代入
         const user = await fetchUserInfo();
@@ -91,16 +85,17 @@ export default function Calendar() {
             plugins={[dayGridPlugin, interactionPlugin]}
             initialView="dayGridMonth"
             eventTimeFormat={{
-            hour: '2-digit',
-            minute: '2-digit',
+            hour: "2-digit",
+            minute: "2-digit",
             hour12: false, // 24時間表記を強制
             }}
             events={schedules}
             selectable={true}
             select={handleDateSelect}
             eventClick={handleDetail}
-            contentHeight={'auto'}
+            contentHeight={"auto"}
         />
         </>
     );
 }
+export default Calendar;
