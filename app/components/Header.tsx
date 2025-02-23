@@ -19,7 +19,6 @@ export default function Header () {
     }, []); 
   
     const userId = id;
-    console.log(userId);
 
     return (
         <div className="flex justify-between mb-12 border-b border-violet-100 p-4">

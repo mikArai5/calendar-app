@@ -8,7 +8,7 @@
 
 .login__inner h1 {
     text-align: center;
-    font-size: 1.5rem;
+    font-size: 1.71rem;
     margin-bottom: 5.97%;
     padding-bottom: 2.99%;
     border-bottom: 1px solid #f0f0f0;
@@ -19,22 +19,27 @@ form div {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    position: relative;
+    width: 100%;
 }
 
 form div:first-child {
-    margin-bottom: 2.99%;
+    margin-bottom: 4.99%;
 }
 
 form div label {
-    width: 29.85%;
+    width: 25%;
     display: block;
+    font-size: 0.88rem;
 }
 
 form div input {
-    width: 59.7%;
+    width: 70%;
     border-radius: 0.31rem;
     color: #000;
     padding: 1.5% 5%;
+    border: 1px solid #f0f0f0;
+    font-size: 0.88rem;
 }
 
 form button {
@@ -46,6 +51,7 @@ form button {
     border-radius: 0.31rem;
     cursor: pointer;
     color: #fff;
+    font-size: 1rem;
 }
 
 .link {
@@ -60,9 +66,39 @@ form button {
     text-decoration: underline;
 }
 
+.error {
+    color: #e83845;
+    font-size: 0.75rem;
+    position: absolute;
+    left: 0;
+    bottom: -50%;
+    margin-left: 30%;
+    width: 70%;
+}
+
 @media screen and (min-width: 769px) {
     .login {
         max-width: 660px;
         margin-top: min(60px, 4.69%);
+    }
+
+    .login__inner h1 {
+        font-size: min(20px, 3.03vw);
+    }
+
+    form div label {
+        font-size: min(14px, 2.12vw);
+    }
+
+    form div input {
+        font-size: min(14px, 2.12vw);
+    }
+
+    form button {
+        font-size: min(16px, 2.42vw);
+    }
+
+    .link {
+        font-size: min(14px, 2.12vw);
     }
 }
