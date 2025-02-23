@@ -4,9 +4,7 @@ import { PostgrestResponse } from "@supabase/supabase-js";
 
 // スケジュールを追加
 export const addSchedule = async (title: string, start: string, end: string, userId: string) => {
-    console.log(title);
-    const {error} = await supabase.from("calendar").insert({ title: title, start: start, end: end, userId: userId});
-    console.log(error);
+    await supabase.from("calendar").insert({ title: title, start: start, end: end, userId: userId});
 };
 
 // テーブルに登録されている全てのスケジュールを取得
