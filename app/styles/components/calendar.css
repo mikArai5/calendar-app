@@ -69,6 +69,10 @@
   width: 100%;
 }
 
+.fc .fc-toolbar.fc-header-toolbar {
+  margin-bottom: 0.71rem;
+}
+
 @media screen and (min-width:769px) {
   .calendar {
     width: 100%;
@@ -134,5 +138,9 @@
 
   form button {
     margin: 0;
+  }
+
+  .fc .fc-toolbar.fc-header-toolbar {
+    margin-bottom: min(10px, 0.78vw);
   }
 }
