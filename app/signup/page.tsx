@@ -65,7 +65,7 @@ export default function SignupPage() {
                     <button type="submit" disabled={!isValid}>Sign up</button>
                 </form>
                 <div className="link">
-                    新規登録がまだの方は<a href="/login">こちら</a>
+                    登録済みの方は<a href="/login">こちら</a>
                 </div>
             </div>
         </div>
