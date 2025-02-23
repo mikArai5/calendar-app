@@ -8,6 +8,7 @@ import { useState, useEffect } from 'react';
 export default function Home() {
   const [ id, setId] = useState('');
 
+  // ログイン中のユーザーIDを取得
   useEffect(() => {
     const getUserId = async () => {
       const user = await fetchUserInfo();

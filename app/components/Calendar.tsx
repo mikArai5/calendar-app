@@ -62,6 +62,7 @@ const Calendar: React.FC<CalendarProps> = ({ userId }) => {
         router.push( `/events/${slug}`);
     }
 
+    // フォームに入力した値をデータベースに登録する
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         if (title === "" || start === "" || end === "") return;

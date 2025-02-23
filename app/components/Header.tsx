@@ -8,6 +8,7 @@ import '../styles/components/header.css';
 export default function Header () {
     const [ id, setId] = useState('');
 
+    // ログイン中のユーザーIDを取得
     useEffect(() => {
       const getUserId = async () => {
         const user = await fetchUserInfo();
