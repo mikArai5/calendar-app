@@ -5,7 +5,7 @@
 
 .calendar__inner {
   width: 100%;
-  padding: 0 5.33vw;
+  padding: 5.33%;
 }
 
 .fc .fc-toolbar-title {
@@ -77,8 +77,8 @@
   .calendar__inner {
     padding: 0 20px;
     margin: 0 auto;
-    width: 51.56vw;
-    max-width: 660px;
+    width: 71.88vw;
+    max-width: 920px;
   }
 
   .inputForm__date {
@@ -91,14 +91,44 @@
   .inputForm__date .inputForm__item {
     width: 49%;
   }
-  
+  .inputForm .inputForm__item label {
+    width: 20%;
+    font-size: min(16px, 1.25vw);
+  }
   .inputForm .inputForm__item.inputForm__title label {
     width: 10%;
-    font-size: 1rem;
+    font-size: min(16px, 1.25vw);
   }
-  
+  .inputForm .inputForm__item input {
+    width: 80%;
+    font-size: min(16px, 1.25vw);
+  }
   .inputForm .inputForm__item.inputForm__title input {
     width: 94%;
-    font-size: 1rem;
+    font-size: min(16px, 1.25vw);
+  }
+
+  .fc .fc-toolbar-title {
+    font-size: min(32px, 2.5vw);
+  }
+  
+  .fc .fc-col-header-cell-cushion {
+    font-size: min(16px, 1.25vw);
+  }
+  
+  .fc .fc-daygrid-day-number {
+    font-size: min(16px, 1.25vw);
+  }
+
+  .inputForm .addButton {
+    font-size: min(16px, 1.25vw);
+  }
+
+  .fc .fc-button {
+    font-size: min(20px, 1.56vw);
+  }
+
+  .fc-h-event .fc-event-title {
+    font-size: min(16px, 1.25vw);
   }
 }

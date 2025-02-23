@@ -22,8 +22,8 @@ export default function Header () {
     const userId = id;
 
     return (
-        <div className="flex justify-between mb-12 border-b border-violet-100 p-4">
-        <h1 className="font-bold text-2xl text-gray-700">Calendar</h1>
+        <div className="flex justify-between border-b border-violet-100 header">
+        <h1 className="font-bold text-gray-700">Calendar</h1>
         { userId && (
             <form>
                 <button formAction={logout} className='logoutButton'>Log out</button>
