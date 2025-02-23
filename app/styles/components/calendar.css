@@ -131,4 +131,8 @@
   .fc-h-event .fc-event-title {
     font-size: min(16px, 1.25vw);
   }
+
+  form button {
+    margin: 0;
+  }
 }
