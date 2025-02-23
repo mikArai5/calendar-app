@@ -21,6 +21,7 @@ export default function Header () {
   
     const userId = id;
     const router = useRouter();
+    console.log(userId);
 
     const Logout = async(e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -37,7 +38,7 @@ export default function Header () {
     return (
         <div className="flex justify-between mb-12 border-b border-violet-100 p-4">
         <h1 className="font-bold text-2xl text-gray-700">Calendar</h1>
-        { !userId && (
+        { userId && (
             <form onSubmit={Logout}>
                 <button className='logoutButton' type="submit">Log out</button>
             </form>
